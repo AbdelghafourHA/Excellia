@@ -1,0 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Cairo:wght@200..1000&family=Cormorant:ital,wght@0,300..700;1,300..700&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Ramis";
+  src: url("/fonts/Ramis Arabic.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-cormorant: "Cormorant", serif;
+  --font-playfair: "Playfair Display", serif;
+  --font-pt-sans: "PT Sans", sans-serif;
+  --font-bai-jamjuree: "Bai Jamjuree", sans-serif;
+  
+  --font-cairo: "Cairo", sans-serif;
+  --font-ramis: "Ramis", sans-serif;
+
+  --color-green-one: #2b5d30;
+  --color-green-two: #45784f;
+  --color-orange: #f15a29;
+  --color-brown-one: #dec099;
+  --color-brown-two: #a57d54;
+  --color-brown-three: #2f0809;
+  --color-text: #333333;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Default English/French styles */
+body {
+  font-family: var(--font-pt-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-cormorant);
+}
+
+/* Arabic language overrides */
+html[lang="ar"] body {
+  font-family: var(--font-cairo);
+}
+
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] h4,
+html[lang="ar"] h5,
+html[lang="ar"] h6 {
+  font-family: var(--font-ramis);
+}
