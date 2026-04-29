@@ -1,11 +1,11 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
-import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
-import About from "./pages/About";
-import Registration from "./pages/Registration";
-import ScrollToTop from "./components/ScrollToTop";
+import Home from "./pages/Home.jsx";
+import Navbar from "./components/Navbar.jsx";
+import About from "./pages/About.jsx";
+import Registration from "./pages/Registration.jsx";
+import ScrollToTop from "./components/ScrollToTop.jsx";
 
 const App = () => {
   return (
