@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Mail } from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
-import LangSwitch from "./langSwitch";
+import LangSwitch from "./langSwitch.jsx";
 import logo from "../assets/Logo01.png";
 
 const Navbar = () => {
