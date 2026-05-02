@@ -10,7 +10,7 @@
     "badge": "Bienvenue à EXCELLIA",
     "title_line1": "Façonnez l'avenir",
     "title_line2": "brillant de votre enfant",
-    "description": "Fournir une éducation Montessori de qualité avec des méthodes d'enseignement innovantes. Rejoignez-nous pour offrir à votre enfant le meilleur départ dans la vie.",
+    "description": "Fournir une éducation Montessori de qualité avec des méthodes d'enseignement innovantes en trois langues : anglais, français et arabe. Rejoignez-nous pour offrir à votre enfant le meilleur départ dans la vie.",
     "montessori": "Méthode Montessori",
     "register_child": "Inscrivez votre enfant",
     "contact_us": "Contactez-nous",
@@ -57,7 +57,9 @@
     "img5": "Sciences Amusantes",
     "img6": "Célébrer le Succès",
     "img7": "Activités Amusantes",
-    "img8": "Se Faire des Amis"
+    "img8": "Se Faire des Amis",
+    "untitled": "Sans titre",
+    "no_images": "Pas d'images pour le moment. Revenez bientôt!"
   },
   "breakfast": {
     "tag": "Alimentation Saine",
@@ -76,7 +78,8 @@
     "thursday_meal": "Flocons d'Avoine avec Dattes & Noix",
     "note_title": "Sain & Nutritif",
     "note_text": "Tous les repas sont préparés frais quotidiennement avec des ingrédients de qualité",
-    "fresh": "Frais Quotidiennement"
+    "fresh": "Frais Quotidiennement",
+    "not_available": "Non disponible"
   },
   "contact": {
     "tagline": "Fournir une éducation de qualité pour un avenir meilleur",
@@ -168,6 +171,9 @@
     "required_fields": "* Champs requis",
     "submit": "Soumettre l'inscription",
     "success_title": "Inscription soumise avec succès!",
-    "success_text": "Merci de votre inscription. Notre équipe vous contactera dans les 24 heures."
+    "success_text": "Merci de votre inscription. Notre équipe vous contactera dans les 24 heures.",
+    "fix_errors": "Veuillez corriger les erreurs dans le formulaire",
+    "submitting": "Envoi en cours...",
+    "success_wait": "Notre équipe vous contactera dans les 24 heures."
   }
 }

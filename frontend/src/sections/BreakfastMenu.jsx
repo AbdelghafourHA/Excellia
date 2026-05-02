@@ -1,45 +1,80 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Coffee, Apple, Heart, Sun, Utensils, Clock, Star } from "lucide-react";
+import useMenu from "../stores/menu.store";
 
 const BreakfastMenu = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  const currentLang = i18n.language;
+  const { menu, fetchMenu, loading } = useMenu();
 
-  // Weekly menu data - will be replaced with dashboard data later
-  const weeklyMenu = [
-    {
-      day: t("breakfast.sunday"),
-      meal: t("breakfast.sunday_meal"),
-      icon: Utensils,
-      color: "from-red-400 to-red-500",
-    },
-    {
-      day: t("breakfast.monday"),
-      meal: t("breakfast.monday_meal"),
-      icon: Coffee,
-      color: "from-blue-400 to-blue-500",
-    },
-    {
-      day: t("breakfast.tuesday"),
-      meal: t("breakfast.tuesday_meal"),
-      icon: Star,
-      color: "from-orange to-orange/80",
-    },
-    {
-      day: t("breakfast.wednesday"),
-      meal: t("breakfast.wednesday_meal"),
-      icon: Sun,
-      color: "from-green-one to-green-two",
-    },
-    {
-      day: t("breakfast.thursday"),
-      meal: t("breakfast.thursday_meal"),
-      icon: Apple,
-      color: "from-brown-two to-brown-one",
-    },
-  ];
+  const daysOrder = ["sunday", "monday", "tuesday", "wednesday", "thursday"];
+
+  const dayTranslations = {
+    sunday: t("breakfast.sunday"),
+    monday: t("breakfast.monday"),
+    tuesday: t("breakfast.tuesday"),
+    wednesday: t("breakfast.wednesday"),
+    thursday: t("breakfast.thursday"),
+  };
+
+  const dayColors = {
+    sunday: "from-red-400 to-red-500",
+    monday: "from-blue-400 to-blue-500",
+    tuesday: "from-orange to-orange/80",
+    wednesday: "from-green-one to-green-two",
+    thursday: "from-brown-two to-brown-one",
+  };
+
+  const dayIcons = {
+    sunday: Utensils,
+    monday: Coffee,
+    tuesday: Star,
+    wednesday: Sun,
+    thursday: Apple,
+  };
+
+  useEffect(() => {
+    fetchMenu();
+  }, []);
+
+  // Create menu object from array
+  const menuMap = {};
+  menu.forEach((item) => {
+    menuMap[item.day] = item;
+  });
+
+  // Get meal text based on current language
+  const getMealText = (item) => {
+    if (!item || item.isActive === false) {
+      return t("breakfast.not_available");
+    }
+
+    const mealObj = item.meal;
+    if (!mealObj) {
+      return t("breakfast.not_available");
+    }
+
+    // Return the meal in the current language
+    if (currentLang === "ar" && mealObj.ar) {
+      return mealObj.ar;
+    }
+    if (currentLang === "fr" && mealObj.fr) {
+      return mealObj.fr;
+    }
+    // Default to English
+    return mealObj.en || t("breakfast.not_available");
+  };
+
+  const weeklyMenu = daysOrder.map((day) => ({
+    day: dayTranslations[day],
+    meal: getMealText(menuMap[day]),
+    icon: dayIcons[day],
+    color: dayColors[day],
+    isActive: menuMap[day]?.isActive !== false,
+  }));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,6 +95,18 @@ const BreakfastMenu = () => {
       transition: { type: "spring", stiffness: 100, damping: 20 },
     },
   };
+
+  if (loading) {
+    return (
+      <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+        <div className="container-custom">
+          <div className="flex justify-center items-center min-h-[400px]">
+            <div className="w-12 h-12 border-4 border-green-one border-t-transparent rounded-full animate-spin" />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
@@ -164,7 +211,7 @@ const BreakfastMenu = () => {
                       <p
                         className={`text-text/80 text-[11px] sm:text-sm leading-relaxed mt-2 sm:mt-3 group-hover:text-text transition-colors duration-300 ${
                           isRTL ? "font-cairo" : ""
-                        }`}
+                        } ${!item.isActive ? "line-through text-text/30" : ""}`}
                       >
                         {item.meal}
                       </p>

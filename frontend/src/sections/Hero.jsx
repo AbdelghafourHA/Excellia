@@ -272,7 +272,7 @@ const Hero = () => {
       </div>
 
       {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="absolute -bottom-1 left-0 right-0">
         <svg
           className="w-full h-10 sm:h-12 md:h-16 text-white"
           preserveAspectRatio="none"

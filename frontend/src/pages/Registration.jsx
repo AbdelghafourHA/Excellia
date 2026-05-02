@@ -17,11 +17,15 @@ import {
   Star,
   GraduationCap,
 } from "lucide-react";
+import { toast } from "react-hot-toast";
+import useRegistrations from "../stores/registrations.store";
 import Contact from "../sections/Contact";
 
 const Registration = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  const { submitRegistration, loading } = useRegistrations();
+
   const [formData, setFormData] = useState({
     childName: "",
     parentName: "",
@@ -34,6 +38,7 @@ const Registration = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,8 +50,10 @@ const Registration = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.childName) newErrors.childName = t("registration.required");
-    if (!formData.parentName) newErrors.parentName = t("registration.required");
+    if (!formData.childName.trim())
+      newErrors.childName = t("registration.required");
+    if (!formData.parentName.trim())
+      newErrors.parentName = t("registration.required");
     if (!formData.email) newErrors.email = t("registration.required");
     else if (!/\S+@\S+\.\S+/.test(formData.email))
       newErrors.email = t("registration.invalid_email");
@@ -57,13 +64,37 @@ const Registration = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  // Convert age group to backend format
+  const getAgeGroup = (age) => {
+    if (age === "3") return "3years";
+    if (age === "4") return "4years";
+    if (age === "5") return "5years";
+    return "3years";
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const newErrors = validateForm();
+
     if (Object.keys(newErrors).length === 0) {
-      setIsSubmitted(true);
-      setTimeout(() => {
-        setIsSubmitted(false);
+      setIsSubmitting(true);
+
+      // Prepare data for backend
+      const registrationData = {
+        childName: formData.childName.trim(),
+        parentName: formData.parentName.trim(),
+        email: formData.email.toLowerCase().trim(),
+        phone: formData.phone.trim(),
+        dateOfBirth: formData.dateOfBirth,
+        ageGroup: getAgeGroup(formData.childAge),
+        address: formData.address.trim(),
+        message: formData.message.trim(),
+      };
+
+      const result = await submitRegistration(registrationData);
+
+      if (result.success) {
+        setIsSubmitted(true);
         setFormData({
           childName: "",
           parentName: "",
@@ -74,9 +105,16 @@ const Registration = () => {
           address: "",
           message: "",
         });
-      }, 3000);
+
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      }
+
+      setIsSubmitting(false);
     } else {
       setErrors(newErrors);
+      toast.error(t("registration.fix_errors"));
     }
   };
 
@@ -148,7 +186,7 @@ const Registration = () => {
           </motion.div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute -bottom-1 left-0 right-0">
           <svg
             className="w-full h-10 sm:h-12 md:h-16 text-white"
             preserveAspectRatio="none"
@@ -288,6 +326,9 @@ const Registration = () => {
                     <p className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
                       {t("registration.success_text")}
                     </p>
+                    <p className="text-text/50 text-sm mt-4">
+                      {t("registration.success_wait")}
+                    </p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit}>
@@ -321,13 +362,14 @@ const Registration = () => {
                             name="childName"
                             value={formData.childName}
                             onChange={handleChange}
+                            disabled={isSubmitting}
                             className={`w-full px-4 py-2 border ${
                               errors.childName
                                 ? "border-orange"
                                 : "border-gray-200"
                             } rounded-lg focus:outline-none focus:border-green-one transition-colors ${
                               isRTL ? "pr-10 font-cairo text-right" : "pl-10"
-                            }`}
+                            } disabled:bg-gray-50 disabled:cursor-not-allowed`}
                             placeholder={t(
                               "registration.child_name_placeholder"
                             )}
@@ -361,13 +403,14 @@ const Registration = () => {
                             name="parentName"
                             value={formData.parentName}
                             onChange={handleChange}
+                            disabled={isSubmitting}
                             className={`w-full px-4 py-2 border ${
                               errors.parentName
                                 ? "border-orange"
                                 : "border-gray-200"
                             } rounded-lg focus:outline-none focus:border-green-one transition-colors ${
                               isRTL ? "pr-10 font-cairo text-right" : "pl-10"
-                            }`}
+                            } disabled:bg-gray-50 disabled:cursor-not-allowed`}
                             placeholder={t(
                               "registration.parent_name_placeholder"
                             )}
@@ -401,11 +444,12 @@ const Registration = () => {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
+                            disabled={isSubmitting}
                             className={`w-full px-4 py-2 border ${
                               errors.email ? "border-orange" : "border-gray-200"
                             } rounded-lg focus:outline-none focus:border-green-one transition-colors ${
                               isRTL ? "pr-10 font-cairo text-right" : "pl-10"
-                            }`}
+                            } disabled:bg-gray-50 disabled:cursor-not-allowed`}
                             placeholder={t("registration.email_placeholder")}
                           />
                         </div>
@@ -437,11 +481,12 @@ const Registration = () => {
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
+                            disabled={isSubmitting}
                             className={`w-full px-4 py-2 border ${
                               errors.phone ? "border-orange" : "border-gray-200"
                             } rounded-lg focus:outline-none focus:border-green-one transition-colors ${
                               isRTL ? "pr-10 font-cairo text-right" : "pl-10"
-                            }`}
+                            } disabled:bg-gray-50 disabled:cursor-not-allowed`}
                             placeholder={t("registration.phone_placeholder")}
                           />
                         </div>
@@ -473,13 +518,14 @@ const Registration = () => {
                             name="dateOfBirth"
                             value={formData.dateOfBirth}
                             onChange={handleChange}
+                            disabled={isSubmitting}
                             className={`w-full px-4 py-2 border ${
                               errors.dateOfBirth
                                 ? "border-orange"
                                 : "border-gray-200"
                             } rounded-lg focus:outline-none focus:border-green-one transition-colors ${
                               isRTL ? "pr-10 font-cairo" : "pl-10"
-                            }`}
+                            } disabled:bg-gray-50 disabled:cursor-not-allowed`}
                           />
                         </div>
                         {errors.dateOfBirth && (
@@ -489,7 +535,7 @@ const Registration = () => {
                         )}
                       </div>
 
-                      {/* Child's Age */}
+                      {/* Child's Age Group */}
                       <div>
                         <label
                           className={`block text-sm font-semibold text-text mb-2 ${
@@ -509,18 +555,18 @@ const Registration = () => {
                             name="childAge"
                             value={formData.childAge}
                             onChange={handleChange}
+                            disabled={isSubmitting}
                             className={`w-full px-4 py-2 border ${
                               errors.childAge
                                 ? "border-orange"
                                 : "border-gray-200"
                             } rounded-lg focus:outline-none focus:border-green-one transition-colors appearance-none bg-white ${
                               isRTL ? "pr-10 font-cairo" : "pl-10"
-                            }`}
+                            } disabled:bg-gray-50 disabled:cursor-not-allowed`}
                           >
                             <option value="">
                               {t("registration.select_age")}
                             </option>
-
                             <option value="3">{t("registration.age_3")}</option>
                             <option value="4">{t("registration.age_4")}</option>
                             <option value="5">{t("registration.age_5")}</option>
@@ -552,10 +598,11 @@ const Registration = () => {
                             name="address"
                             value={formData.address}
                             onChange={handleChange}
+                            disabled={isSubmitting}
                             rows="3"
                             className={`w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-green-one transition-colors ${
                               isRTL ? "pr-10 font-cairo" : "pl-10"
-                            }`}
+                            } disabled:bg-gray-50 disabled:cursor-not-allowed`}
                             placeholder={t("registration.address_placeholder")}
                           />
                         </div>
@@ -574,8 +621,9 @@ const Registration = () => {
                           name="message"
                           value={formData.message}
                           onChange={handleChange}
+                          disabled={isSubmitting}
                           rows="3"
-                          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-green-one transition-colors"
+                          className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-green-one transition-colors disabled:bg-gray-50 disabled:cursor-not-allowed"
                           placeholder={t("registration.message_placeholder")}
                         />
                       </div>
@@ -592,13 +640,23 @@ const Registration = () => {
                       </p>
                       <button
                         type="submit"
-                        className="cursor-pointer w-full bg-orange text-white py-3 rounded-lg font-semibold hover:scale-105 transition-all hover:shadow-xl flex items-center justify-center gap-2 group"
+                        disabled={isSubmitting}
+                        className="cursor-pointer w-full bg-orange text-white py-3 rounded-lg font-semibold hover:scale-105 transition-all hover:shadow-xl flex items-center justify-center gap-2 group disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
                       >
-                        <span>{t("registration.submit")}</span>
-                        {isRTL ? (
-                          <ChevronRight className="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform" />
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            {t("registration.submitting")}
+                          </>
                         ) : (
-                          <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                          <>
+                            <span>{t("registration.submit")}</span>
+                            {isRTL ? (
+                              <ChevronRight className="w-5 h-5 rotate-180 group-hover:-translate-x-1 transition-transform" />
+                            ) : (
+                              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                            )}
+                          </>
                         )}
                       </button>
                     </div>

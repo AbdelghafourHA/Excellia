@@ -1,63 +1,89 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { Camera } from "lucide-react";
+import useImages from "../stores/images.store";
 
 const Gallery = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
+  const currentLang = i18n.language;
+  const { images, fetchImages, loading } = useImages();
 
-  const galleryImages = [
-    {
-      id: 1,
-      url: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=500&h=500&fit=crop",
-      title: "gallery.img1",
-      rotate: -2,
-    },
-    {
-      id: 2,
-      url: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=500&h=500&fit=crop",
-      title: "gallery.img2",
-      rotate: 3,
-    },
-    {
-      id: 3,
-      url: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=500&h=500&fit=crop",
-      title: "gallery.img3",
-      rotate: -1,
-    },
-    {
-      id: 4,
-      url: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=500&h=500&fit=crop",
-      title: "gallery.img4",
-      rotate: 2,
-    },
-    {
-      id: 5,
-      url: "https://images.unsplash.com/photo-1503676382389-4809596d5290?w=500&h=500&fit=crop",
-      title: "gallery.img5",
-      rotate: -3,
-    },
-    {
-      id: 6,
-      url: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=500&h=500&fit=crop",
-      title: "gallery.img6",
-      rotate: 1,
-    },
-    {
-      id: 7,
-      url: "https://images.unsplash.com/photo-1577896851231-70ef18881754?w=500&h=500&fit=crop",
-      title: "gallery.img7",
-      rotate: -2,
-    },
+  useEffect(() => {
+    fetchImages();
+  }, []);
 
-    {
-      id: 8,
-      url: "https://images.unsplash.com/photo-1516627145497-ae6968895b74?w=500&h=500&fit=crop",
-      title: "gallery.img8",
-      rotate: -1,
-    },
-  ];
+  // Get the title in the current language
+  const getTitle = (image) => {
+    if (!image.title) return t("gallery.untitled");
+
+    if (currentLang === "ar" && image.title.ar) {
+      return image.title.ar;
+    }
+    if (currentLang === "fr" && image.title.fr) {
+      return image.title.fr;
+    }
+    // Default to English
+    return image.title.en || t("gallery.untitled");
+  };
+
+  if (loading) {
+    return (
+      <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+        <div className="container-custom relative z-10">
+          <div className="flex justify-center items-center min-h-[400px]">
+            <div className="w-12 h-12 border-4 border-green-one border-t-transparent rounded-full animate-spin" />
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (images.length === 0) {
+    return (
+      <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+        <div className="container-custom relative z-10">
+          <div className="text-center mb-12 sm:mb-16 md:mb-20">
+            <div
+              className={`inline-flex items-center gap-2 bg-green-one/10 px-4 py-2 rounded-full mb-4 ${
+                isRTL ? "flex-row-reverse" : ""
+              }`}
+            >
+              <Camera className="w-4 h-4 text-green-one" />
+              <span
+                className={`text-green-one text-sm font-semibold ${
+                  isRTL ? "font-cairo" : ""
+                }`}
+              >
+                {t("gallery.tag")}
+              </span>
+            </div>
+            <h2
+              className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
+                isRTL ? "font-cairo" : ""
+              }`}
+            >
+              <span className="text-text">{t("gallery.title")}</span>
+              <br />
+              <span className="text-green-one">
+                {t("gallery.title_highlight")}
+              </span>
+            </h2>
+            <p className="text-text/70 text-sm sm:text-base">
+              {t("gallery.no_images")}
+            </p>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Random rotation for polaroid effect
+  const getRandomRotation = (index) => {
+    const rotations = [-2, -1, 0, 1, 2, 3];
+    return rotations[index % rotations.length];
+  };
 
   return (
     <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
@@ -106,20 +132,24 @@ const Gallery = () => {
 
         {/* Polaroid-style Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-          {galleryImages.map((image, index) => (
+          {images.map((image, index) => (
             <motion.div
-              key={image.id}
-              initial={{ opacity: 0, y: 50, rotate: image.rotate }}
-              whileInView={{ opacity: 1, y: 0, rotate: image.rotate }}
+              key={image._id}
+              initial={{ opacity: 0, y: 50, rotate: getRandomRotation(index) }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                rotate: getRandomRotation(index),
+              }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.05 }}
-              style={{ rotate: `${image.rotate}deg` }}
+              style={{ rotate: `${getRandomRotation(index)}deg` }}
               className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 hover:rotate-0"
             >
               <div className="p-3 pb-5">
                 <img
                   src={image.url}
-                  alt={t(image.title)}
+                  alt={getTitle(image)}
                   className="w-full aspect-square object-cover rounded-lg"
                   loading="lazy"
                 />
@@ -128,7 +158,7 @@ const Gallery = () => {
                     isRTL ? "font-cairo" : ""
                   }`}
                 >
-                  {t(image.title)}
+                  {getTitle(image)}
                 </p>
               </div>
             </motion.div>
