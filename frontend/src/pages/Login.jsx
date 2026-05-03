@@ -135,19 +135,6 @@ const Login = () => {
                 </div>
               </div>
 
-              {/* Demo Credentials Hint */}
-              <div className="mb-5 p-3 bg-gray-50 rounded-lg border border-gray-100">
-                <p className="text-text/60 text-xs text-center">
-                  Demo Credentials:
-                </p>
-                <p className="text-text/60 text-xs text-center mt-1">
-                  Email: admin@excellia.com
-                </p>
-                <p className="text-text/60 text-xs text-center">
-                  Password: admin123
-                </p>
-              </div>
-
               {/* Submit Button */}
               <button
                 type="submit"

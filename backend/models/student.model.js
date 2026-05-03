@@ -22,7 +22,7 @@ const studentSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
-      unique: true,
+      // unique: true,
     },
     phone: {
       type: String,
