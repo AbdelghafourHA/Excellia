@@ -17,7 +17,7 @@ import {
   Star,
   GraduationCap,
 } from "lucide-react";
-import { toast } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import useRegistrations from "../stores/registrations.store";
 import Contact from "../sections/Contact";
 
@@ -142,6 +142,7 @@ const Registration = () => {
     <>
       {/* Hero Section */}
       <section className="relative min-h-[40vh] bg-gradient-to-br from-green-one via-green-two to-green-one overflow-hidden">
+        <Toaster />
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-32 h-32 bg-brown-one/10 rounded-full blur-3xl animate-pulse" />
           <div className="absolute bottom-20 right-10 w-40 h-40 bg-orange/10 rounded-full blur-3xl animate-bounce" />

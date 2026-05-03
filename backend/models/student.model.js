@@ -22,11 +22,13 @@ const studentSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
+      unique: true,
     },
     phone: {
       type: String,
       required: [true, "Phone number is required"],
       trim: true,
+      match: [/^[0-9+ ]{8,15}$/, "Invalid phone number"],
     },
     dateOfBirth: {
       type: Date,
@@ -51,6 +53,7 @@ const studentSchema = new mongoose.Schema(
       type: String,
       enum: ["pending", "approved", "rejected"],
       default: "pending",
+      index: true,
     },
   },
   {

@@ -70,7 +70,7 @@ const ImagesTab = () => {
           formData.append("image", imageFile);
         }
         await editImage(editingImage._id, formData);
-        toast.success("Image updated successfully");
+        // toast.success("Image updated successfully");
       } else {
         const formData = new FormData();
         formData.append("titleEn", titleEn);
@@ -78,7 +78,7 @@ const ImagesTab = () => {
         formData.append("titleFr", titleFr);
         formData.append("image", imageFile);
         await addImage(formData);
-        toast.success("Image added successfully");
+        // toast.success("Image added successfully");
       }
 
       setShowModal(false);
@@ -99,7 +99,7 @@ const ImagesTab = () => {
   const handleDeleteImage = async (id) => {
     if (window.confirm("Are you sure you want to delete this image?")) {
       await removeImage(id);
-      toast.success("Image deleted successfully");
+      // toast.success("Image deleted successfully");
     }
   };
 

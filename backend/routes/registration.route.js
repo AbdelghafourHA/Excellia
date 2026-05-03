@@ -9,11 +9,21 @@ import {
   deleteMultipleRegistrations,
 } from "../controllers/registration.controller.js";
 import protect from "../middlewares/auth.middleware.js";
+import rateLimit from "express-rate-limit";
 
 const router = express.Router();
 
+const submitLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 10,
+  message: {
+    success: false,
+    message: "Too many submissions, please try again later",
+  },
+});
+
 // Public route - anyone can submit registration
-router.post("/", submitRegistration);
+router.post("/", submitLimiter, submitRegistration);
 
 // Protected routes - Admin only (all routes below require authentication)
 router.get("/", protect, getAllRegistrations);

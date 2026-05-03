@@ -14,11 +14,16 @@ const Contact = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
 
+  // Use the exact address from the map link
+  const fullAddress = "P22H+X42, Saoula, Algeria";
+  // Google Maps search link for the address
+  const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=Saoula+Algeria`;
+
   const contactInfo = [
     {
       icon: Phone,
       title: t("contact.phone"),
-      info: "+213 123 456 789",
+      info: "+213 123 456 789", // Keep as is or update if you have a specific number
       link: "tel:+213123456789",
     },
     {
@@ -30,8 +35,8 @@ const Contact = () => {
     {
       icon: MapPin,
       title: t("contact.address"),
-      info: t("contact.address_text"),
-      link: "https://maps.google.com",
+      info: fullAddress, // Use the precise address
+      link: googleMapsLink, // Link to a Google Maps search
     },
   ];
 
@@ -104,7 +109,7 @@ const Contact = () => {
           {/* Contact Info Grid */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-wrap justify-center gap-6 mb-8"
+            className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8"
           >
             {contactInfo.map((info, index) => (
               <a
@@ -165,7 +170,7 @@ const Contact = () => {
             className="mt-8 pt-6 border-t border-gray-100"
           >
             <p className={`text-text/40 text-xs ${isRTL ? "font-cairo" : ""}`}>
-              © 2024 EXCELLIA. {t("contact.copyright")}
+              © 2026 EXCELLIA. {t("contact.copyright")}
             </p>
           </motion.div>
         </motion.div>
