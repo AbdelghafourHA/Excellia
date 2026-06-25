@@ -135,7 +135,7 @@ const About = () => {
       </section>
 
       {/* Video Section */}
-      <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+      {/* <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -198,7 +198,7 @@ const About = () => {
             </div>
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Our Story Section */}
       <section className="relative py-16 sm:py-20 md:py-24 bg-white overflow-hidden">
