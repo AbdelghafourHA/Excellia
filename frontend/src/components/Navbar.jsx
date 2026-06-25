@@ -117,7 +117,7 @@ const Navbar = () => {
                 whileHover={{ scale: 1.05 }}
                 className="text-white font-cormorant text-lg sm:text-xl font-bold hidden sm:block"
               >
-                EXCELLIA
+                EMINORA
               </motion.span>
             </Link>
 
