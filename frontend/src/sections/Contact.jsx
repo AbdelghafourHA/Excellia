@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebook,
   faInstagram,
-  faYoutube,
+  faTiktok,
 } from "@fortawesome/free-brands-svg-icons";
 import logo from "../assets/Logo02.png";
 
@@ -14,23 +14,21 @@ const Contact = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
 
-  // Use the exact address from the map link
-  const fullAddress = "P22H+X42, Saoula, Algeria";
-  // Google Maps search link for the address
-  const googleMapsLink = `https://www.google.com/maps/search/?api=1&query=Saoula+Algeria`;
+  const fullAddress = "Shaoula, Alger";
+  const googleMapsLink = `https://maps.app.goo.gl/vStBeJ9SZ1ZDazzY9?g_st=iwb`;
 
   const contactInfo = [
     {
       icon: Phone,
       title: t("contact.phone"),
-      info: "+213 123 456 789", // Keep as is or update if you have a specific number
-      link: "tel:+213123456789",
+      info: "+213 775 79 61 80",
+      link: "tel:+213775796180",
     },
     {
       icon: Mail,
       title: t("contact.email"),
-      info: "info@excellia.com",
-      link: "mailto:info@excellia.com",
+      info: "excellia2026@gmail.com",
+      link: "excellia2026@gmail.com",
     },
     {
       icon: MapPin,
@@ -43,17 +41,17 @@ const Contact = () => {
   const socialLinks = [
     {
       icon: <FontAwesomeIcon icon={faFacebook} />,
-      href: "https://facebook.com",
+      href: "https://www.facebook.com/share/r/1APpc879u9/",
       label: "Facebook",
     },
     {
       icon: <FontAwesomeIcon icon={faInstagram} />,
-      href: "https://instagram.com",
+      href: "https://www.instagram.com/eminora.montessori16?igsh=MW9ucHh5NXRlNmtxcQ==",
       label: "Instagram",
     },
     {
-      icon: <FontAwesomeIcon icon={faYoutube} />,
-      href: "https://youtube.com",
+      icon: <FontAwesomeIcon icon={faTiktok} />,
+      href: "https://www.tiktok.com/@eminoramontessorialger?_r=1&_t=ZS-97VdSqYKym5",
       label: "YouTube",
     },
   ];
@@ -170,7 +168,7 @@ const Contact = () => {
             className="mt-8 pt-6 border-t border-gray-100"
           >
             <p className={`text-text/40 text-xs ${isRTL ? "font-cairo" : ""}`}>
-              © 2026 EXCELLIA. {t("contact.copyright")}
+              © 2026 EMINORA. {t("contact.copyright")}
             </p>
           </motion.div>
         </motion.div>

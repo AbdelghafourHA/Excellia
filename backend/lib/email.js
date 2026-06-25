@@ -39,19 +39,19 @@ export const sendParentConfirmation = async (
     };
 
     const info = await transporter.sendMail({
-      from: `"EXCELLIA Kindergarten" <${process.env.EMAIL_USER}>`,
+      from: `"EMINORA Kindergarten" <${process.env.EMAIL_USER}>`,
       to: parentEmail,
-      subject: "Registration Received - EXCELLIA Kindergarten",
+      subject: "Registration Received - EMINORA Kindergarten",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
           <div style="text-align: center; padding-bottom: 20px; border-bottom: 2px solid #2b5d30;">
-            <h1 style="color: #2b5d30; margin: 0;">EXCELLIA Kindergarten</h1>
+            <h1 style="color: #2b5d30; margin: 0;">EMINORA Kindergarten</h1>
             <p style="color: #666; margin: 5px 0 0;">Quality Montessori Education</p>
           </div>
           
           <div style="padding: 20px 0;">
             <h2 style="color: #2b5d30;">Dear ${parentName},</h2>
-            <p>Thank you for registering <strong>${childName}</strong> at EXCELLIA Kindergarten!</p>
+            <p>Thank you for registering <strong>${childName}</strong> at EMINORA Kindergarten!</p>
             
             <div style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
               <h3 style="color: #2b5d30; margin-top: 0;">Registration Summary:</h3>
@@ -60,16 +60,16 @@ export const sendParentConfirmation = async (
               <p><strong>Status:</strong> <span style="color: #f15a29;">Pending Review</span></p>
             </div>
             
-            <p>Our team will review your application within 24-48 hours. You will receive another email once your registration is confirmed.</p>
+            <p>Our team will review your application within 24-48 hours.</p>
             
             <p>If you have any questions, please don't hesitate to contact us.</p>
             
-            <p>Best regards,<br><strong>EXCELLIA Kindergarten Team</strong></p>
+            <p>Best regards,<br><strong>EMINORA Kindergarten Team</strong></p>
           </div>
           
           <div style="text-align: center; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #999;">
-            <p>© 2026 EXCELLIA Kindergarten. All rights reserved.</p>
-            <p>123 Education Street, Algiers, Algeria | info@excellia.com</p>
+            <p>© 2026 EMINORA Kindergarten. All rights reserved.</p>
+            <p>Shaoula, Algiers, Algeria | 0775796180</p>
           </div>
         </div>
       `,
@@ -96,9 +96,9 @@ export const sendAdminNotification = async (registrationData) => {
     };
 
     const info = await transporter.sendMail({
-      from: `"EXCELLIA Kindergarten" <${process.env.EMAIL_USER}>`,
+      from: `"EMINORA Kindergarten" <${process.env.EMAIL_USER}>`,
       to: process.env.ADMIN_EMAIL,
-      subject: "New Registration Request - EXCELLIA Kindergarten",
+      subject: "New Registration Request - EMINORA Kindergarten",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
           <div style="text-align: center; padding-bottom: 20px; border-bottom: 2px solid #2b5d30;">
@@ -164,7 +164,7 @@ export const sendAdminNotification = async (registrationData) => {
           </div>
           
           <div style="text-align: center; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #999;">
-            <p>© 2026 EXCELLIA Kindergarten. All rights reserved.</p>
+            <p>© 2026 EMINORA Kindergarten. All rights reserved.</p>
           </div>
         </div>
       `,
