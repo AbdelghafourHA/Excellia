@@ -95,7 +95,7 @@ const Dashboard = () => {
       >
         <div className="p-6 border-b border-gray-100 flex justify-between items-center">
           <div>
-            <h2 className="text-xl font-bold text-green-one">EXCELLIA</h2>
+            <h2 className="text-xl font-bold text-green-one">EMINORA</h2>
             <p className="text-text/40 text-xs">Admin Panel</p>
           </div>
           <button
