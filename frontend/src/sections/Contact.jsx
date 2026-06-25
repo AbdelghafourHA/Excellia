@@ -106,6 +106,7 @@ const Contact = () => {
 
           {/* Contact Info Grid */}
           <motion.div
+            dir="ltr"
             variants={itemVariants}
             className="flex flex-wrap justify-center gap-x-8 gap-y-4 mb-8"
           >
@@ -127,6 +128,7 @@ const Contact = () => {
 
           {/* Working Hours */}
           <motion.div
+            dir="ltr"
             variants={itemVariants}
             className="flex flex-col items-center gap-1 text-text/60 text-sm mb-8"
           >
