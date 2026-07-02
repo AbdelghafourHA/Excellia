@@ -12,6 +12,8 @@ import {
   Smile,
   Brain,
   Leaf,
+  GraduationCap,
+  Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -21,37 +23,39 @@ const Services = () => {
 
   const services = [
     {
-      icon: BookOpen,
-      title: t("services.montessori_learning"),
-      description: t("services.montessori_learning_desc"),
-      color: "from-orange to-orange/70",
-      bgColor: "bg-orange/10",
-    },
-    {
-      icon: Heart,
-      title: t("services.character_building"),
-      description: t("services.character_building_desc"),
+      icon: GraduationCap,
+      title: t("services.montessori_100"),
+      description: t("services.montessori_100_desc"),
       color: "from-brown-one to-brown-two",
       bgColor: "bg-brown-one/10",
+      tag: "100%",
     },
     {
-      icon: Brain,
-      title: t("services.sensorial_development"),
-      description: t("services.sensorial_development_desc"),
+      icon: Sparkles,
+      title: t("services.montessori_inspired"),
+      description: t("services.montessori_inspired_desc"),
+      color: "from-orange to-orange/70",
+      bgColor: "bg-orange/10",
+      tag: t("services.inspired"),
+    },
+    {
+      icon: Globe,
+      title: t("services.trilingual"),
+      description: t("services.trilingual_desc"),
       color: "from-green-two to-green-one",
       bgColor: "bg-green-two/10",
     },
     {
-      icon: Globe,
-      title: t("services.language_skills"),
-      description: t("services.language_skills_desc"),
+      icon: Heart,
+      title: t("services.psychological_support"),
+      description: t("services.psychological_support_desc"),
       color: "from-brown-two to-brown-one",
       bgColor: "bg-brown-two/10",
     },
     {
       icon: Leaf,
-      title: t("services.practical_life"),
-      description: t("services.practical_life_desc"),
+      title: t("services.safe_environment"),
+      description: t("services.safe_environment_desc"),
       color: "from-orange to-brown-one",
       bgColor: "bg-orange/10",
     },
@@ -151,6 +155,13 @@ const Services = () => {
               whileHover={{ y: -10 }}
               className="group relative bg-white rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100"
             >
+              {/* Tag Badge */}
+              {service.tag && (
+                <div className="absolute top-4 right-4 bg-gradient-to-r from-green-one to-orange text-white text-xs font-bold px-3 py-1 rounded-full">
+                  {service.tag}
+                </div>
+              )}
+
               {/* Icon */}
               <div
                 className={`${service.bgColor} w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}

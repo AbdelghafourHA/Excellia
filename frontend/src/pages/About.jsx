@@ -18,9 +18,13 @@ import {
   Compass,
   Palette,
   Globe,
+  CheckCircle,
+  Star,
+  Shield,
 } from "lucide-react";
 import Contact from "../sections/Contact";
 import { Link } from "react-router-dom";
+
 const About = () => {
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === "ar";
@@ -134,72 +138,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Video Section */}
-      {/* <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
-        <div className="container-custom">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 sm:mb-16"
-          >
-            <div
-              className={`inline-flex items-center gap-2 bg-green-one/10 px-4 py-2 rounded-full mb-4 ${
-                isRTL ? "flex-row-reverse" : ""
-              }`}
-            >
-              <Camera className="w-4 h-4 text-green-one" />
-              <span
-                className={`text-green-one text-sm font-semibold ${
-                  isRTL ? "font-cairo" : ""
-                }`}
-              >
-                {t("about.video_tag")}
-              </span>
-            </div>
-            <h2
-              className={`text-3xl sm:text-4xl md:text-5xl font-bold mb-4 ${
-                isRTL ? "font-cairo" : ""
-              }`}
-            >
-              <span className="text-text">{t("about.video_title")}</span>
-              <br />
-              <span className="text-green-one">
-                {t("about.video_title_highlight")}
-              </span>
-            </h2>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
-              <div className="relative aspect-video bg-gray-900">
-                <img
-                  src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=675&fit=crop"
-                  alt="Video thumbnail"
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="w-20 h-20 bg-orange rounded-full flex items-center justify-center shadow-2xl hover:bg-orange/90 transition-colors"
-                  >
-                    <Play className="w-8 h-8 text-white ml-1" />
-                  </motion.button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section> */}
-
       {/* Our Story Section */}
       <section className="relative py-16 sm:py-20 md:py-24 bg-white overflow-hidden">
         <div className="container-custom">
@@ -270,7 +208,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Montessori Method Section */}
+      {/* Two Educational Systems Section */}
       <section className="relative py-16 sm:py-20 md:py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden">
         <div className="container-custom">
           <motion.div
@@ -291,7 +229,7 @@ const About = () => {
                   isRTL ? "font-cairo" : ""
                 }`}
               >
-                {t("about.method_tag")}
+                {t("about.systems_tag")}
               </span>
             </div>
             <h2
@@ -299,76 +237,155 @@ const About = () => {
                 isRTL ? "font-cairo" : ""
               }`}
             >
-              <span className="text-text">{t("about.method_title")}</span>
+              <span className="text-text">{t("about.systems_title")}</span>
               <br />
               <span className="text-green-one">
-                {t("about.method_title_highlight")}
+                {t("about.systems_title_highlight")}
               </span>
             </h2>
+            <p
+              className={`text-text/70 text-base max-w-3xl mx-auto ${
+                isRTL ? "font-cairo" : ""
+              }`}
+            >
+              {t("about.systems_subtitle")}
+            </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* 100% Montessori */}
             <motion.div
               initial={{ opacity: 0, x: isRTL ? 50 : -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-brown-one"
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-brown-one/10 rounded-full flex items-center justify-center">
+                  <Star className="w-6 h-6 text-brown-one" />
+                </div>
                 <h3
-                  className={`text-2xl font-bold text-green-one mb-4 ${
+                  className={`text-2xl font-bold text-brown-one ${
                     isRTL ? "font-cairo" : ""
                   }`}
                 >
-                  {t("about.method_name")}
+                  {t("about.system_montessori_100")}
                 </h3>
-                <p
-                  className={`text-text/70 text-base leading-relaxed mb-4 ${
-                    isRTL ? "font-cairo" : ""
-                  }`}
-                >
-                  {t("about.method_text1")}
-                </p>
-                <p
-                  className={`text-text/70 text-base leading-relaxed ${
-                    isRTL ? "font-cairo" : ""
-                  }`}
-                >
-                  {t("about.method_text2")}
-                </p>
               </div>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-brown-one flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_100_point1")}
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-brown-one flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_100_point2")}
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-brown-one flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_100_point3")}
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-brown-one flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_100_point4")}
+                  </span>
+                </li>
+              </ul>
             </motion.div>
 
+            {/* Montessori-Inspired */}
             <motion.div
               initial={{ opacity: 0, x: isRTL ? -50 : 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-gradient-to-br from-green-one to-green-two rounded-2xl p-8 text-white"
+              className="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-orange"
             >
-              <h3
-                className={`text-2xl font-bold mb-4 ${
-                  isRTL ? "font-cairo" : ""
-                }`}
-              >
-                {t("about.goals_title")}
-              </h3>
-              <p
-                className={`text-white/90 leading-relaxed mb-4 ${
-                  isRTL ? "font-cairo" : ""
-                }`}
-              >
-                {t("about.goals_text1")}
-              </p>
-              <p
-                className={`text-white/90 leading-relaxed ${
-                  isRTL ? "font-cairo" : ""
-                }`}
-              >
-                {t("about.goals_text2")}
-              </p>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 bg-orange/10 rounded-full flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-orange" />
+                </div>
+                <h3
+                  className={`text-2xl font-bold text-orange ${
+                    isRTL ? "font-cairo" : ""
+                  }`}
+                >
+                  {t("about.system_montessori_inspired")}
+                </h3>
+              </div>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-orange flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_inspired_point1")}
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-orange flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_inspired_point2")}
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-orange flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_inspired_point3")}
+                  </span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-orange flex-shrink-0 mt-1" />
+                  <span className={`text-text/70 ${isRTL ? "font-cairo" : ""}`}>
+                    {t("about.montessori_inspired_point4")}
+                  </span>
+                </li>
+              </ul>
             </motion.div>
           </div>
+
+          {/* Common Features */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-12 bg-gradient-to-r from-green-one to-green-two rounded-2xl p-8 text-white"
+          >
+            <h3
+              className={`text-2xl font-bold mb-4 text-center ${
+                isRTL ? "font-cairo" : ""
+              }`}
+            >
+              {t("about.common_features")}
+            </h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
+                <Globe className="w-5 h-5 text-brown-one flex-shrink-0" />
+                <span className={`text-sm ${isRTL ? "font-cairo" : ""}`}>
+                  {t("about.common_languages")}
+                </span>
+              </div>
+              <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
+                <Heart className="w-5 h-5 text-brown-one flex-shrink-0" />
+                <span className={`text-sm ${isRTL ? "font-cairo" : ""}`}>
+                  {t("about.common_psychological")}
+                </span>
+              </div>
+              <div className="flex items-center gap-3 bg-white/10 rounded-lg p-3">
+                <Shield className="w-5 h-5 text-brown-one flex-shrink-0" />
+                <span className={`text-sm ${isRTL ? "font-cairo" : ""}`}>
+                  {t("about.common_safe")}
+                </span>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

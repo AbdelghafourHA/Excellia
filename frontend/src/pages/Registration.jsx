@@ -32,7 +32,7 @@ const Registration = () => {
     email: "",
     phone: "",
     dateOfBirth: "",
-    childAge: "",
+    ageGroup: "",
     address: "",
     message: "",
   });
@@ -60,16 +60,19 @@ const Registration = () => {
     if (!formData.phone) newErrors.phone = t("registration.required");
     if (!formData.dateOfBirth)
       newErrors.dateOfBirth = t("registration.required");
-    if (!formData.childAge) newErrors.childAge = t("registration.required");
+    if (!formData.ageGroup) newErrors.ageGroup = t("registration.required");
     return newErrors;
   };
 
   // Convert age group to backend format
   const getAgeGroup = (age) => {
-    if (age === "3") return "3years";
-    if (age === "4") return "4years";
-    if (age === "5") return "5years";
-    return "3years";
+    if (age === "3-12months") return "3-12months";
+    if (age === "1-2years") return "1-2years";
+    if (age === "2-3years") return "2-3years";
+    if (age === "3-4years") return "3-4years";
+    if (age === "4-5years") return "4-5years";
+    if (age === "5-6years") return "5-6years";
+    return "3-12months";
   };
 
   const handleSubmit = async (e) => {
@@ -86,7 +89,7 @@ const Registration = () => {
         email: formData.email.toLowerCase().trim(),
         phone: formData.phone.trim(),
         dateOfBirth: formData.dateOfBirth,
-        ageGroup: getAgeGroup(formData.childAge),
+        ageGroup: getAgeGroup(formData.ageGroup),
         address: formData.address.trim(),
         message: formData.message.trim(),
       };
@@ -101,7 +104,7 @@ const Registration = () => {
           email: "",
           phone: "",
           dateOfBirth: "",
-          childAge: "",
+          ageGroup: "",
           address: "",
           message: "",
         });
@@ -553,12 +556,12 @@ const Registration = () => {
                             }`}
                           />
                           <select
-                            name="childAge"
-                            value={formData.childAge}
+                            name="ageGroup"
+                            value={formData.ageGroup}
                             onChange={handleChange}
                             disabled={isSubmitting}
                             className={`w-full px-4 py-2 border ${
-                              errors.childAge
+                              errors.ageGroup
                                 ? "border-orange"
                                 : "border-gray-200"
                             } rounded-lg focus:outline-none focus:border-green-one transition-colors appearance-none bg-white ${
@@ -568,14 +571,29 @@ const Registration = () => {
                             <option value="">
                               {t("registration.select_age")}
                             </option>
-                            <option value="3">{t("registration.age_3")}</option>
-                            <option value="4">{t("registration.age_4")}</option>
-                            <option value="5">{t("registration.age_5")}</option>
+                            <option value="3-12months">
+                              {t("registration.age_3_12months")}
+                            </option>
+                            <option value="1-2years">
+                              {t("registration.age_1_2years")}
+                            </option>
+                            <option value="2-3years">
+                              {t("registration.age_2_3years")}
+                            </option>
+                            <option value="3-4years">
+                              {t("registration.age_3_4years")}
+                            </option>
+                            <option value="4-5years">
+                              {t("registration.age_4_5years")}
+                            </option>
+                            <option value="5-6years">
+                              {t("registration.age_5_6years")}
+                            </option>
                           </select>
                         </div>
-                        {errors.childAge && (
+                        {errors.ageGroup && (
                           <p className="text-orange text-xs mt-1">
-                            {errors.childAge}
+                            {errors.ageGroup}
                           </p>
                         )}
                       </div>

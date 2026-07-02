@@ -10,6 +10,8 @@ import {
   Star,
   Users,
   Trophy,
+  GraduationCap,
+  Heart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -102,20 +104,31 @@ const Hero = () => {
                 {t("hero.description")}
               </p>
 
-              {/* Montessori Badge */}
-              <div
-                className={`inline-flex items-center gap-2 bg-brown-one/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 ${
-                  isRTL ? "flex-row-reverse" : ""
-                }`}
-              >
-                <BookOpen className="w-4 h-4 text-brown-one" />
-                <span
-                  className={`text-white text-sm font-semibold ${
-                    isRTL ? "font-cairo" : ""
-                  }`}
-                >
-                  {t("hero.montessori")}
-                </span>
+              {/* Two Educational Programs Badges */}
+              <div className="flex flex-wrap gap-3 mb-6 justify-center lg:justify-start">
+                {/* 100% Montessori Badge */}
+                <div className="inline-flex items-center gap-2 bg-brown-one/30 backdrop-blur-sm px-4 py-2 rounded-full border border-brown-one/40">
+                  <GraduationCap className="w-4 h-4 text-brown-one" />
+                  <span
+                    className={`text-white text-sm font-semibold ${
+                      isRTL ? "font-cairo" : ""
+                    }`}
+                  >
+                    {t("hero.montessori_100")}
+                  </span>
+                </div>
+
+                {/* Inspired Montessori Badge */}
+                <div className="inline-flex items-center gap-2 bg-orange/30 backdrop-blur-sm px-4 py-2 rounded-full border border-orange/40">
+                  <Heart className="w-4 h-4 text-orange" />
+                  <span
+                    className={`text-white text-sm font-semibold ${
+                      isRTL ? "font-cairo" : ""
+                    }`}
+                  >
+                    {t("hero.montessori_inspired")}
+                  </span>
+                </div>
               </div>
 
               {/* Buttons */}

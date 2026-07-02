@@ -22,7 +22,6 @@ const studentSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       match: [/^\S+@\S+\.\S+$/, "Please enter a valid email address"],
-      // unique: true,
     },
     phone: {
       type: String,
@@ -37,7 +36,14 @@ const studentSchema = new mongoose.Schema(
     ageGroup: {
       type: String,
       required: [true, "Age group is required"],
-      enum: ["3years", "4years", "5years"],
+      enum: [
+        "3-12months",
+        "1-2years",
+        "2-3years",
+        "3-4years",
+        "4-5years",
+        "5-6years",
+      ],
     },
     address: {
       type: String,
