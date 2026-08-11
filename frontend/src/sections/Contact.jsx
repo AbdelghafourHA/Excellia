@@ -21,8 +21,8 @@ const Contact = () => {
     {
       icon: Phone,
       title: t("contact.phone"),
-      info: "+213 775 79 61 80",
-      link: "tel:+213775796180",
+      info: "+213 770 74 77 23",
+      link: "tel:+213770747723",
     },
     {
       icon: Mail,

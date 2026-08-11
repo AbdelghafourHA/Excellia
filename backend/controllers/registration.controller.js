@@ -45,11 +45,19 @@ export const submitRegistration = async (req, res) => {
     }
 
     // Validate age group
-    const validAgeGroups = ["3years", "4years", "5years"];
+    const validAgeGroups = [
+      "3-12months",
+      "1-2years",
+      "2-3years",
+      "3-4years",
+      "4-5years",
+      "5-6years",
+    ];
     if (!validAgeGroups.includes(ageGroup)) {
       return res.status(400).json({
         success: false,
-        message: "Invalid age group. Must be 3years, 4years, or 5years",
+        message:
+          "Invalid age group. Must be 3-12months, 1-2years, 2-3years, 3-4years, 4-5years, or 5-6years",
       });
     }
 
@@ -338,9 +346,12 @@ export const getRegistrationStats = async (req, res) => {
     const rejected = await Student.countDocuments({ status: "rejected" });
 
     const byAgeGroup = {
-      "3years": await Student.countDocuments({ ageGroup: "3years" }),
-      "4years": await Student.countDocuments({ ageGroup: "4years" }),
-      "5years": await Student.countDocuments({ ageGroup: "5years" }),
+      "3-12months": await Student.countDocuments({ ageGroup: "3-12months" }),
+      "1-2years": await Student.countDocuments({ ageGroup: "1-2years" }),
+      "2-3years": await Student.countDocuments({ ageGroup: "2-3years" }),
+      "3-4years": await Student.countDocuments({ ageGroup: "3-4years" }),
+      "4-5years": await Student.countDocuments({ ageGroup: "4-5years" }),
+      "5-6years": await Student.countDocuments({ ageGroup: "5-6years" }),
     };
 
     res.status(200).json({
